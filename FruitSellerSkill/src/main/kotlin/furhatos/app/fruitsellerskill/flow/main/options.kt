@@ -22,10 +22,12 @@ val Options = state(Parent) {
 
     onResponse<RequestOptions> {
         furhat.say("We have ${Fruit().getEnum(Language.ENGLISH_US).joinToString(", ")}")
-        furhat.ask("Do you want some?")
+        furhat.say("You can choose between our list. You can specify the kind of fruit and the desired quantity.")
+        furhat.ask("Did you find something interesting?")
     }
 
     onResponse<Yes> {
+        furhat.say("You can specify the kind of fruit you want and the desired quantity.")
         furhat.ask {
             random {
                 +"What kind of fruit do you want?"

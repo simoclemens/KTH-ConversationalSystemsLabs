@@ -17,7 +17,9 @@ val Greeting = state(Parent) {
                 +"Oh, hello there"
                 +"Hi, welcome to the fruit shop"
             }
+
         }
+        furhat.say ("I am a ChatBot here to assist you with your fruit order!")
         goto(TakingOrder)
     }
 }

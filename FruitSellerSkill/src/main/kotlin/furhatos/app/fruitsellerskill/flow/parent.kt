@@ -2,13 +2,23 @@ package furhatos.app.fruitsellerskill.flow
 
 import furhatos.app.fruitsellerskill.flow.main.Idle
 import furhatos.flow.kotlin.*
+import java.util.*
+
+val usersQueue: Queue<furhatos.records.User> = LinkedList()
 
 val Parent: State = state {
 
-    onUserEnter(instant = true) {
+    onUserEnter() {
         when { // "it" is the user that entered
-            furhat.isAttendingUser -> furhat.glance(it) // Glance at new users entering
-            !furhat.isAttendingUser -> furhat.attend(it) // Attend user if not attending anyone
+            furhat.isAttendingUser -> {
+                var oldUser = furhat.users.current
+                furhat.attend(it) // Attend user if not attending anyone
+                furhat.say("Please wait, I will be there shortly!")
+                furhat.attend(oldUser)
+                reentry()
+            }
+
+
         }
     }
 
